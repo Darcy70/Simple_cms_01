@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
-  root 'demo#index'
 
   get 'demo/index'
+  root 'demo#index'
+  #
+
   # match "demo/index", :to => "demo#index", :via => :get
 
   # default routes may go away
