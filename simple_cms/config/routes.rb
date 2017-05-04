@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
+  root 'demo#index'
+
+  resources :subjects do
+    member do
+      get :delete
+    end
+  end
 
   get 'demo/index'
-  root 'demo#index'
-  #
+
 
   # match "demo/index", :to => "demo#index", :via => :get
 
