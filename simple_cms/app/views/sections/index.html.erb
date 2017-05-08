@@ -1,15 +1,13 @@
-<% if !flash[:notice].blank? %>
-<div class="notice">
-  <%= flash[:notice] %>
-</div>
-<% end %>
+<% @page_title = "All Sections" %>
 
 <div class="sections index">
   <h2>Sections</h2>
 
-  <%= link_to("<< Back to Page List", pages_path, :class => 'back-link') %>
+
+<%= link_to("<< Back to Menu", admin_path, :class => 'back-link') %>
+  <%= link_to("<< Back to Page List", pages_path(:subject_id => @page.subject_id), :class => 'back-link') %>
   <br>
-  <%= link_to("Add New Section", new_section_path, :class => 'action new') %>
+  <%= link_to("Add New Section", new_section_path(:page_id => @page.id), :class => 'action new') %>
 
   <table class="listing" summary="section list">
     <tr class="header">
@@ -23,12 +21,12 @@
     <tr>
       <td><%= section.position %></td>
       <td><%= section.name %></td>
-      <td class="center"><%= section.visible ? 'Yes' : 'No' %></td>
+      <td class="center"><%= status_tag(section.visible) %></td>
       <td class="center"><%= section.page_id %></td>
       <td class="actions">
-        <%= link_to("Show", section_path(section), :class => 'action show') %>
-        <%= link_to("Edit", edit_section_path(section), :class => 'action edit') %>
-        <%= link_to("Delete", delete_section_path(section), :class => 'action delete') %>
+        <%= link_to("Show", section_path(section, :page_id => @page.id), :class => 'action show') %>
+        <%= link_to("Edit", edit_section_path(section, :page_id => @page.id), :class => 'action edit') %>
+        <%= link_to("Delete", delete_section_path(section, :page_id => @page.id), :class => 'action delete') %>
       </td>
     </tr>
     <% end %>
