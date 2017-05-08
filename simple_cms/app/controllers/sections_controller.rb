@@ -4,7 +4,6 @@ class SectionsController < ApplicationController
 
   before_action :confirm_logged_in
   before_action :find_page
-  before_action :find_pages, :only => [:new, :create, :edit, :update]
   before_action :set_section_count, :only => [:new, :create, :edit, :update]
 
   def index
@@ -65,12 +64,8 @@ class SectionsController < ApplicationController
     @page = Page.find(params[:page_id])
   end
 
-  def find_pages
-    @pages = Page.sorted
-  end
-
   def set_section_count
-    @section_count = Section.count
+    @section_count = @page.sections.count
     if params[:action] == 'new' || params[:action] == 'create'
         @section_count += 1
     end
